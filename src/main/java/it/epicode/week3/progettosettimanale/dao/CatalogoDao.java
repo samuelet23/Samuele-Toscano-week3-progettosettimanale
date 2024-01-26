@@ -37,7 +37,7 @@ public class CatalogoDao {
         Query query = em.createQuery("delete c from Catalogo c where c.isbn = :isbn");
         query.setParameter("isbn", isbn);
         query.executeUpdate();
-            System.out.println("L'elemento:" + findByIsbn(isbn) + "è stato eliminato");
+
         et.commit();
 
         }catch (Exception e){
@@ -120,7 +120,7 @@ public class CatalogoDao {
         try {
             et.begin();
             LocalDate oggi = LocalDate.now();
-            String queryString = "select c from Catalogo left join c.prestito p left join p.utenti u where (:oggi between p.dataInizioPrestito and p.getDataRestituzioneEffettiva) and (u.numeroTessera = :tessera)  ";
+            String queryString = "select c from Catalogo c inner join c.prestito p inner join p.utente u where u.numeroTessera = :tessera and p.dataRestituzioneEffettiva is null ";
             Query query = em.createQuery(queryString);
             query.setParameter("tessera", tessera);
             query.setParameter("oggi", oggi);

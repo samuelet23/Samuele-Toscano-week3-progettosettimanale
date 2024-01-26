@@ -21,7 +21,7 @@ public abstract class Catalogo {
     @Column(name = "numero_pagine", nullable = false)
     protected int numeroPagine;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "prestito_fk")
     protected Prestito prestito;
 

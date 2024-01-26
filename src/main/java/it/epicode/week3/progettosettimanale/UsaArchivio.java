@@ -79,13 +79,12 @@ public class UsaArchivio {
         utenteDao.addElement(utente3);
 
 
-        prestito.setElementiPrestati(List.of(rivista1, libro2, libro1));
+        prestito.setElementoPrestato(libro1);
         prestito.setDataInizioPrestito(LocalDate.of(2024, 10, 1));
         prestito.getDataRestituzionePrevista();
-        prestito.setDataRestituzioneEffettiva(LocalDate.of(2024, 11, 10));
-        prestito.setUtenti(Set.of(utente1,utente2));
-
+        prestito.setUtente(utente1);
         prestitoDao.addElement(prestito);
+
 
 //        catalogoDao.removeFromIsbn(3);
 //        System.out.println(catalogoDao.findByIsbn(3));
@@ -94,7 +93,7 @@ public class UsaArchivio {
 //        catalogoDao.findByTitle("quotidi")
 //                .stream()
 //                .forEach(catalogo -> System.out.println(catalogo));
-//        System.out.println(catalogoDao.findExpiredPrestito());
+        System.out.println(catalogoDao.findByTessera(2));
 
     }
 }

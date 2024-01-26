@@ -19,9 +19,9 @@ public class Prestito {
     @JoinColumn(name = "utente_fk" )
     private Utente utente;
 
-    @Column(name = "elementi_prestati")
-    @OneToMany(mappedBy = "prestito")
-    private List<Catalogo> elementiPrestati;
+
+    @OneToOne(mappedBy = "prestito")
+    private Catalogo elementoPrestato;
 
     @Column(name = "data_inizio_prestito")
     private LocalDate dataInizioPrestito;
@@ -42,12 +42,12 @@ public class Prestito {
         this.dataRestituzioneEffettiva = dataRestituzioneEffettiva;
     }
 
-    public Prestito(int id, Set<Utente> utente, List<Catalogo> elementiPrestati, LocalDate dataInizioPrestito, LocalDate getDataRestituzioneEffettiva) {
-        this.id = id;
-        this.utente = (Utente) utente;
-        this.elementiPrestati = elementiPrestati;
+    public Prestito(Utente utente, Catalogo elementoPrestato, LocalDate dataInizioPrestito, LocalDate dataRestituzionePrevista, LocalDate dataRestituzioneEffettiva) {
+        this.utente = utente;
+        this.elementoPrestato = elementoPrestato;
         this.dataInizioPrestito = dataInizioPrestito;
-        this.dataRestituzioneEffettiva = getDataRestituzioneEffettiva;
+        this.dataRestituzionePrevista = dataRestituzionePrevista;
+        this.dataRestituzioneEffettiva = dataRestituzioneEffettiva;
     }
 
     @Override
@@ -55,32 +55,32 @@ public class Prestito {
         return "Prestito{" +
                 "id=" + id +
                 ", utenti=" + utente +
-                ", elementiPrestati=" + elementiPrestati +
+                ", elementoPrestato=" + elementoPrestato +
                 ", dataInizioPrestito=" + dataInizioPrestito +
                 ", dataRestituzionePrevista=" + dataRestituzionePrevista +
                 ", dataRestituzioneEffettiva=" + dataRestituzioneEffettiva +
                 '}';
     }
 
-    public Utente getUtenti() {
+    public Utente getUtente() {
         return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
 
     public LocalDate getDataRestituzionePrevista() {
        return dataInizioPrestito.plusDays(30);
     }
 
-    public void setUtenti(Set<Utente> utenti) {
-        this.utente = utente;
+
+    public Catalogo getElementoPrestato() {
+        return elementoPrestato;
     }
 
-
-    public List<Catalogo> getElementiPrestati() {
-        return elementiPrestati;
-    }
-
-    public void setElementiPrestati(List<Catalogo> elementiPrestati) {
-        this.elementiPrestati = elementiPrestati;
+    public void setElementoPrestato(Catalogo elementoPrestato) {
+        this.elementoPrestato = elementoPrestato;
     }
 
     public LocalDate getDataInizioPrestito() {
