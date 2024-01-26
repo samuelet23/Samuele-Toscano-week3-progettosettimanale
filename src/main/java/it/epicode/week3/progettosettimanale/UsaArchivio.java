@@ -93,7 +93,7 @@ public class UsaArchivio {
 //        catalogoDao.findByTitle("quotidi")
 //                .stream()
 //                .forEach(catalogo -> System.out.println(catalogo));
-        System.out.println(catalogoDao.findByTessera(2));
+//        System.out.println(catalogoDao.findByTessera(2));
 
     }
 }
